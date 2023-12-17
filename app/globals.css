@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Khand';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/khand/v17/TwMN-IINQlQQ0bLpd2EwbQc.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@keyframes disapear {
+	0% {
+		display: hidden;
+	}
+	50% {
+    display: visible;
+	}
+	100% {
+		display: hidden;
+	}
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -17,6 +38,7 @@
 }
 
 body {
+  direction: ltr; 
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -24,4 +46,40 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 0px;
+
+  direction: rtl; 
+
+  background-color: #111;
+} 
+
+::-webkit-scrollbar-thumb {
+  background-color: #333;
+  border-radius: 50px ;
+}
+
+.title {
+  color: #FFF;
+  font-family: 'Khand';
+  font-size: 250px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 270px;
+}
+
+.buy {
+  font-family: Khand;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 75px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.navbar {
+  border-image: linear-gradient(-90deg, #fff, transparent) 10;
 }
