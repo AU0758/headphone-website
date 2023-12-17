@@ -111,3 +111,11 @@ p {
 .navbar {
   border-image: linear-gradient(-90deg, #fff, transparent) 10;
 }
+
+.tstroke {
+  color: transparent;
+
+  z-index: 50;
+
+  -webkit-text-stroke: 1px white;
+}

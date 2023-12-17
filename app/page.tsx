@@ -42,10 +42,11 @@ export default function Home() {
         <p className={`text-center w-[100vw] text-[200px] ${headphones <= 16 ? 'hidden' : headphones >= 70 && headphones <= 100 ? '' : 'hidden'}`}>Connect <b  className='font-300'>Anywhere</b> on <b  className='font-300'>anything</b>.</p>
         <p className={`text-center w-[100vw] text-[50px] ${headphones <= 16 ? 'hidden' : headphones >= 70 && headphones <= 100 ? '' : 'hidden'}`}>Integrated Adapters for all your devices.</p>
       </div>      
-      <p className={` ${headphones <= 16 ? 'hidden' : headphones >= 100 && headphones <= 150 ? 'absolute right-0 bottom-0 w-[15ch] text-[150px] text-right m-24' : 'hidden'}`}><b  className='font-300'>2 GB</b> of <b  className='font-300'>memory. Never stop vibing.</b>
+      <p className={` ${headphones <= 16 ? 'hidden' : headphones >= 100 && headphones <= 160 ? 'absolute right-0 bottom-0 w-[15ch] text-[150px] text-right m-24' : 'hidden'}`}><b  className='font-300'>2 GB</b> of <b  className='font-300'>memory. Never stop vibing.</b>
       </p>
       <div className='w-[100vw] flex flex-col items-center'>
-        <p className={`text-center w-[100vw] text-[150px] ${headphones <= 16 ? 'hidden' : headphones >= 150 ? '' : 'hidden'}`}><b className='font-300'>Bluethoth Integrated.</b></p>
+        <p className={`absolute text-center w-[100vw] text-[150px] tstroke ${headphones <= 16 ? 'hidden' : headphones >= 160 ? '' : 'hidden'}`}><b className='font-300'>Bluethoth Integrated.</b></p>
+        <p className={`text-center w-[100vw] text-[150px] ${headphones <= 16 ? 'hidden' : headphones >= 160 ? '' : 'hidden'}`}><b className='font-300'>Bluethoth Integrated.</b></p>
       </div>  
 
 
