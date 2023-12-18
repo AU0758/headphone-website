@@ -118,6 +118,7 @@ p {
   z-index: 50;
 
   -webkit-text-stroke: 1px white;
+  paint-order: stroke fill;
 }
 
 @keyframes fadeIn {
