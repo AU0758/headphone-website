@@ -22,7 +22,6 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    // Preload images in a range before and after the current scroll position
     const preloadedImagePaths = [];
     for (let i = Math.floor(headphones) - 5; i <= Math.ceil(headphones) + 5; i++) {
       preloadedImagePaths.push(`/headphone/${i}.png`);
@@ -30,16 +29,18 @@ export default function Home() {
     setImagePaths(preloadedImagePaths);
   }, [headphones]);
 
-  
+  const handleImageLoad = () => {
+    // Trigger the preloading of nearby images when the current image is loaded
+    const preloadedImagePaths = [];
+    for (let i = Math.floor(headphones) - 5; i <= Math.ceil(headphones) + 5; i++) {
+      preloadedImagePaths.push(`/headphone/${i}.png`);
+    }
+    setImagePaths(preloadedImagePaths);
+  };
+
   const imageLoader = () => {
-    return `/headphone/${Math.round(headphones)}.png`
-  }
-
-  console.log(`/headphone/${Math.round(headphones)}.png`);
-
-  
-  // Use dynamic import for the image path
-  const imagePath = `/headphone/${Math.round(headphones)}.png`;
+    return `/headphone/${Math.round(headphones)}.png`;
+  };
 
   return (
     <main className='h-[100vh] w-[100vw] sticky top-0 flex flex-col justify-center items-center'>
@@ -47,16 +48,17 @@ export default function Home() {
       {imagePaths.map((path) => (
         <link key={path} rel="preload" href={path} as="image" />
       ))}
-      
+
       {/* Use the next/image component for optimized image loading */}
       <Image
-        src={imagePath}
+        src={imageLoader()}
         alt={`Headphone image ${Math.round(headphones)}`}
         width={1920}
         height={1080}
         className='w-[calc(100vw-7px)] absolute z-10'
         loader={imageLoader}
         priority
+        onLoad={handleImageLoad}
       />
 
       <div className='w-[100vw] flex flex-col items-end'>
