@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [headphones, setHeadphones] = useState(0);
+  const [imagePaths, setImagePaths] = useState<string[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,16 +21,13 @@ export default function Home() {
     };
   }, []);
 
-  const preloadImages = () => {
-    // Preload images based on scroll position
-    for (let i = Math.round(headphones); i <= 180; i++) {
-      const img = document.createElement('img');
-      img.src = `/headphone/${i}.png`; // Placeholder URL
-    }
-  };
-  
   useEffect(() => {
-    preloadImages();
+    // Preload images in a range before and after the current scroll position
+    const preloadedImagePaths = [];
+    for (let i = Math.floor(headphones) - 5; i <= Math.ceil(headphones) + 5; i++) {
+      preloadedImagePaths.push(`/headphone/${i}.png`);
+    }
+    setImagePaths(preloadedImagePaths);
   }, [headphones]);
 
   
@@ -44,17 +42,23 @@ export default function Home() {
   const imagePath = `/headphone/${Math.round(headphones)}.png`;
 
   return (
-    <main className='h-[100vh] w-[100vw] sticky top-0 flex flex-col justify-center items-center'>  
-            {/* Use the next/image component for optimized image loading */}
+    <main className='h-[100vh] w-[100vw] sticky top-0 flex flex-col justify-center items-center'>
+      {/* Preload images */}
+      {imagePaths.map((path) => (
+        <link key={path} rel="preload" href={path} as="image" />
+      ))}
+      
+      {/* Use the next/image component for optimized image loading */}
       <Image
-        loading='lazy'
         src={imagePath}
-        alt={`Headphone image`}
-        width={1920} // specify the actual width of your image
-        height={1080} // specify the actual height of your image
+        alt={`Headphone image ${Math.round(headphones)}`}
+        width={1920}
+        height={1080}
         className='w-[calc(100vw-7px)] absolute z-10'
         loader={imageLoader}
+        priority
       />
+
       <div className='w-[100vw] flex flex-col items-end'>
         <div className='flex flex-col items-center'>
           <h1 className={`title text-center w-[7ch] m-[5rem] transition-all ${headphones >= 19 ? 'hidden' : ''}`}>IMMERSE IT IN</h1>
