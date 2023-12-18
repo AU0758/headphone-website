@@ -83,7 +83,7 @@ body {
 p {
   color: #FFF;
   text-align: right;
-  font-family: 'Roboto Condensed' 'roboto', sans-serif;
+  font-family: 'Roboto Condensed',  'roboto', sans-serif;
   font-size: 75px;
   font-style: normal;
   font-weight: 100;
@@ -113,12 +113,17 @@ p {
 }
 
 .tstroke {
-  color: transparent;
+  color: #fff2;
 
   z-index: 50;
 
-  -webkit-text-stroke: 1px white;
-  paint-order: stroke fill;
+  
+  color: transparent;
+  text-shadow: 
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
 }
 
 @keyframes fadeIn {
