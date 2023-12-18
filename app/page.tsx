@@ -20,11 +20,41 @@ export default function Home() {
     };
   }, []);
 
+  const preloadImages = () => {
+    // Preload images based on scroll position
+    for (let i = Math.round(headphones); i <= 180; i++) {
+      const img = document.createElement('img');
+      img.src = `/headphone/${i}.png`; // Placeholder URL
+    }
+  };
+  
+  useEffect(() => {
+    preloadImages();
+  }, [headphones]);
+
+  
+  const imageLoader = () => {
+    return `/headphone/${Math.round(headphones)}.png`
+  }
+
   console.log(`/headphone/${Math.round(headphones)}.png`);
+
+  
+  // Use dynamic import for the image path
+  const imagePath = `/headphone/${Math.round(headphones)}.png`;
 
   return (
     <main className='h-[100vh] w-[100vw] sticky top-0 flex flex-col justify-center items-center'>  
-      <img src={`/headphone/${Math.round(headphones)}.png`} alt={`/headphone/${Math.round(headphones)}.png`} className='w-[calc(100vw-7px)] absolute z-10' loading='lazy'/>
+            {/* Use the next/image component for optimized image loading */}
+      <Image
+        loading='lazy'
+        src={imagePath}
+        alt={`Headphone image`}
+        width={1920} // specify the actual width of your image
+        height={1080} // specify the actual height of your image
+        className='w-[calc(100vw-7px)] absolute z-10'
+        loader={imageLoader}
+      />
       <div className='w-[100vw] flex flex-col items-end'>
         <div className='flex flex-col items-center'>
           <h1 className={`title text-center w-[7ch] m-[5rem] transition-all ${headphones >= 19 ? 'hidden' : ''}`}>IMMERSE IT IN</h1>
