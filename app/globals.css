@@ -119,3 +119,31 @@ p {
 
   -webkit-text-stroke: 1px white;
 }
+
+@keyframes fadeIn {
+  0% {
+    display: hidden;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    display: hidden;
+  }
+}
+
+.transition-fade-in {
+  animation: fadeIn 500ms ease-in-out;
+}
+
+.transition-fade-out {
+  animation: fadeOut 500ms ease-in-out;
+}
