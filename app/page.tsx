@@ -1,7 +1,5 @@
 
 'use client'
-
-import Image  from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -9,41 +7,72 @@ export default function Home() {
   const [headphones, setHeadphones] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPercentage = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 180;
-      setHeadphones(scrollPercentage);
+    const html = document.documentElement;
+    const canvas = document.getElementById("headphones") as HTMLCanvasElement;
+    const context = canvas.getContext("2d")!;
+    const frameCount = 180;
+    
+
+    const currentFrame = (index: number) => (
+      `/headphone/${index}.png`
+    );
+
+    const preloadImages = () => {
+      for (let i = 1; i < frameCount; i++) {
+        const img = new Image();
+        img.src = currentFrame(i);
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    const img = new Image()
+    img.src = currentFrame(1);
+    canvas.width = 1920;
+    canvas.height = 1080;
 
+
+    img.onload = function () {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      context.drawImage(img, 0, 0);
+    }
+
+    const updateImage = (index: number) => {
+      img.src = currentFrame(index);
+      context.drawImage(img, 0, 0);
+    }
+
+    window.addEventListener('scroll', () => {  
+      const scrollTop = html.scrollTop;
+      const maxScrollTop = html.scrollHeight - window.innerHeight;
+      const scrollFraction = scrollTop / maxScrollTop;
+      const frameIndex = Math.min(
+        frameCount - 1,
+        Math.ceil(scrollFraction * frameCount)
+      );
+      
+      requestAnimationFrame(() => updateImage(frameIndex + 1))
+    });
+
+    preloadImages();
+    
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', () => {  
+        const scrollTop = html.scrollTop;
+        const maxScrollTop = html.scrollHeight - window.innerHeight;
+        const scrollFraction = scrollTop / maxScrollTop;
+        const frameIndex = Math.min(
+          frameCount - 1,
+          Math.ceil(scrollFraction * frameCount)
+        );
+        
+        requestAnimationFrame(() => updateImage(frameIndex + 1))
+      });
     };
   }, []);
 
-  
-  const imageLoader = () => {
-    return `/headphone/${Math.round(headphones)}.png`
-  }
-
-  console.log(`/headphone/${Math.round(headphones)}.png`);
-
-  
-  // Use dynamic import for the image path
-  const imagePath = `/headphone/${Math.round(headphones)}.png`;
-
   return (
-    <main className='h-[100vh] w-[100vw] sticky top-0 flex flex-col justify-center items-center'>  
+    <main className='h-[100vh] w-[calc(100vw-7px)] sticky top-0 flex flex-col justify-center items-center'>  
             {/* Use the next/image component for optimized image loading */}
-      <Image
-      src={imagePath}
-      alt={`Headphone image ${Math.round(headphones)}`}
-      width={1920} // specify the actual width of your image
-      height={1080} // specify the actual height of your image
-      className='w-[calc(100vw-7px)] absolute z-10'
-      loader={imageLoader}
-      priority
-      />
+      <canvas id='headphones' className='w-[calc(100vw-7px)] z-10 absolute'/>
       <div className='w-[100vw] flex flex-col items-end'>
         <div className='flex flex-col items-center'>
           <h1 className={`title text-center w-[7ch] m-[5rem] transition-fade-in ${headphones >= 19 ? 'hidden' : ''}`}>IMMERSE IT IN</h1>
