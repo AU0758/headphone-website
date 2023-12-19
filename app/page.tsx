@@ -11,7 +11,8 @@ export default function Home() {
     const canvas = document.getElementById("headphones") as HTMLCanvasElement;
     const context = canvas.getContext("2d")!;
     const frameCount = 180;
-    
+       
+    const calculateDelay = (t: number) => t * t;
 
     const currentFrame = (index: number) => (
       `/headphone/${index.toString().padStart(4, '0')}.png`
@@ -41,7 +42,7 @@ export default function Home() {
       context.drawImage(img, 0, 0);
     }
 
-    window.addEventListener('scroll', () => {  
+    window.addEventListener('scroll', () => {
       const scrollTop = html.scrollTop;
       const maxScrollTop = html.scrollHeight - window.innerHeight;
       const scrollFraction = scrollTop / maxScrollTop;
@@ -49,8 +50,11 @@ export default function Home() {
         frameCount - 1,
         Math.ceil(scrollFraction * frameCount)
       );
-      
-      requestAnimationFrame(() => updateImage(frameIndex + 1))
+    
+      const delay = calculateDelay(); // You can implement a function to calculate the delay based on your preferences
+      setTimeout(() => {
+        requestAnimationFrame(() => updateImage(frameIndex + 1));
+      }, delay);
     });
 
     preloadImages();
