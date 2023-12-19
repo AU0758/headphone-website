@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [headphones, setHeadphones] = useState(0);
+  const [imageArray, setImageArray] = useState<string[]>([]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,7 +21,31 @@ export default function Home() {
     };
   }, []);
 
-  console.log(`/headphone/${Math.round(headphones)}.png`);
+  useEffect(() => {
+    const fetchImageData = async () => {
+      const newArray: string[] = [];
+
+      for (let index = 0; index < 180; index++) {
+        const imagePath = `/headphone/${index}.png`;
+
+        // Fetch the image data
+        const response = await fetch(imagePath);
+        const blob = await response.blob();
+
+        // Convert the blob to base64
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const base64data = reader.result as string;
+          newArray.push(base64data);
+        };
+        reader.readAsDataURL(blob);
+      }
+
+      setImageArray(newArray);
+    };
+
+    fetchImageData();
+  }, []);
 
   
   // Use dynamic import for the image path
@@ -30,7 +55,7 @@ export default function Home() {
     <main className='h-[100vh] w-[100vw] sticky top-0 flex flex-col justify-center items-center'>  
             {/* Use the next/image component for optimized image loading */}
             <Image
-        src={imagePath}
+        src={imageArray[0]}
         alt={`Headphone image ${Math.round(headphones)}`}
         width={1920} // specify the actual width of your image
         height={1080} // specify the actual height of your image
