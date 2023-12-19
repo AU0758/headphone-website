@@ -100,7 +100,7 @@ p {
 }
 
 .buy {
-  font-family: Khand;
+  font-family: 'Khand';
   font-size: 50px;
   font-weight: 700;
   line-height: 75px;
@@ -117,13 +117,16 @@ p {
 
   z-index: 50;
 
+  font-family: 'Khand';
   
   color: transparent;
-  text-shadow: 
-    -1px -1px 0 #000,  
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
+  stroke: 1px white;
+  
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: white;
+}
+.Khand {
+  font-family: 'Khand';
 }
 
 @keyframes fadeIn {

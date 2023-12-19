@@ -37,6 +37,7 @@ export default function Home() {
 
     const updateImage = (index: number) => {
       img.src = currentFrame(index);
+      setHeadphones(index);
       context.drawImage(img, 0, 0);
     }
 
@@ -94,7 +95,7 @@ export default function Home() {
       </p>
       <div className='w-[100vw] flex flex-col items-center'>
         <p className={`absolute text-center w-[100vw] text-[150px] tstroke transition-fade-in ${headphones <= 16 ? 'hidden' : headphones >= 160 ? 'transition-fade-out' : 'hidden'}`}><b className='font-300'>Bluethoth Integrated.</b></p>
-        <p className={`text-center w-[100vw] text-[150px] transition-fade-in ${headphones <= 16 ? 'hidden' : headphones >= 160 ? '' : 'hidden'}`}><b className='font-300'>Bluethoth Integrated.</b></p>
+        <p className={`text-center w-[100vw] text-[150px] transition-fade-in Khand ${headphones <= 16 ? 'hidden' : headphones >= 160 ? '' : 'hidden'}`}><b className='font-300'>Bluethoth Integrated.</b></p>
       </div>  
 
 
