@@ -73,7 +73,7 @@ export default function Home() {
   return (
     <main className='h-[100vh] w-[calc(100vw-7px)] sticky top-0 flex flex-col justify-center items-center'>  
             {/* Use the next/image component for optimized image loading */}
-      <canvas id='headphones' className='w-[calc(100vw-7px)] z-10 absolute'/>
+      <canvas id='headphones' className='w-[calc(100vw-7px)] z-[-5] absolute opacity'/>
       <div className='w-[100vw] flex flex-col items-end'>
         <div className='flex flex-col items-center'>
           <h1 className={`title text-center w-[7ch] m-[5rem] transition-fade-in ${headphones >= 19 ? 'hidden' : ''}`}>IMMERSE IT IN</h1>
@@ -94,7 +94,6 @@ export default function Home() {
       <p className={` transition-fade-in ${headphones <= 16 ? 'hidden' : headphones >= 100 && headphones <= 160 ? 'absolute right-0 bottom-0 w-[15ch] text-[150px] text-right m-24' : 'hidden'}`}><b  className='font-300'>2 GB</b> of <b  className='font-300'>memory. Never stop vibing.</b>
       </p>
       <div className='w-[100vw] flex flex-col items-center'>
-        <p className={`absolute text-center w-[100vw] text-[150px] tstroke transition-fade-in ${headphones <= 16 ? 'hidden' : headphones >= 160 ? 'transition-fade-out' : 'hidden'}`}><b className='font-300'>Bluethoth Integrated.</b></p>
         <p className={`text-center w-[100vw] text-[150px] transition-fade-in Khand ${headphones <= 16 ? 'hidden' : headphones >= 160 ? '' : 'hidden'}`}><b className='font-300'>Bluethoth Integrated.</b></p>
       </div>  
 

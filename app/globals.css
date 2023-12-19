@@ -112,19 +112,6 @@ p {
   border-image: linear-gradient(-90deg, #fff, transparent) 10;
 }
 
-.tstroke {
-  color: #fff2;
-
-  z-index: 50;
-
-  font-family: 'Khand';
-  
-  color: transparent;
-  stroke: 1px white;
-  
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: white;
-}
 .Khand {
   font-family: 'Khand';
 }
