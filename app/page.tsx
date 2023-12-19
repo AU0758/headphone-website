@@ -26,8 +26,8 @@ export default function Home() {
 
     const img = new Image()
     img.src = currentFrame(1);
-    canvas.width = 1920;
-    canvas.height = 1080;
+    canvas.width = 1920 / 2;
+    canvas.height = 1080 / 2;
 
 
     img.onload = function () {
