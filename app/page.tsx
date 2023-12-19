@@ -11,8 +11,6 @@ export default function Home() {
     const canvas = document.getElementById("headphones") as HTMLCanvasElement;
     const context = canvas.getContext("2d")!;
     const frameCount = 180;
-       
-    const calculateDelay = (t: number) => t * t;
 
     const currentFrame = (index: number) => (
       `/headphone/${index.toString().padStart(4, '0')}.png`
@@ -41,6 +39,8 @@ export default function Home() {
       setHeadphones(index);
       context.drawImage(img, 0, 0);
     }
+    
+    const easeInQuad = (t: number) => t + t * 2;
 
     window.addEventListener('scroll', () => {
       const scrollTop = html.scrollTop;
@@ -50,12 +50,23 @@ export default function Home() {
         frameCount - 1,
         Math.ceil(scrollFraction * frameCount)
       );
-    
-      const delay = calculateDelay(); // You can implement a function to calculate the delay based on your preferences
+
+      const delay = calculateEaseInDelay(scrollFraction); // Calculate the eased delay
       setTimeout(() => {
         requestAnimationFrame(() => updateImage(frameIndex + 1));
       }, delay);
     });
+    function calculateEaseInDelay(scrollFraction:number) {
+      // Use the easeInQuad function to apply ease-in logic
+      const easedFraction = easeInQuad(scrollFraction);
+      
+      // You can adjust the multiplier and add a base delay to control the overall delay
+      const baseDelay = 2; // Base delay in milliseconds
+      const multiplier = 5; // Adjust this multiplier based on your preference
+
+      return baseDelay + easedFraction * multiplier;
+    }
+
 
     preloadImages();
     
