@@ -14,7 +14,7 @@ export default function Home() {
     
 
     const currentFrame = (index: number) => (
-      `/headphone/${index}.png`
+      `/headphone/${index.toString().padStart(4, '0')}.png`
     );
 
     const preloadImages = () => {
